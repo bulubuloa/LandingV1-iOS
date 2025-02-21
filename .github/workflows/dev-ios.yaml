@@ -9,12 +9,17 @@ on:
 jobs:
   
   build:
-    runs-on: macos-14
+    runs-on: macos-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        
+      
+      - name: Setup XCode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '16.1'
+
       - name: Setup iOS Certificates & Provisioning Profiles
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.CERTIFICATES_P12 }}
@@ -44,4 +49,7 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PP_PATH_ROOT ~/Library/MobileDevice/Provisioning\ Profiles
 
-      
+      - name: Build ipa with Fastlane
+        env: 
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APPLE_SPECIFIC_PASSWORD }}
+        run: fastlane ios beta internal
