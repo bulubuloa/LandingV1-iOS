@@ -30,6 +30,8 @@ platform :ios do
     )
     upload_to_testflight(
       username: ENV["APPLE_SPECIFIC_USERNAME"],
+      skip_waiting_for_build_processing: true,
+      apple_id: ENV["APPLE_SPECIFIC_USERNAME"]
     )
   end
 end
