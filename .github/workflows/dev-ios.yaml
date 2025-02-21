@@ -50,4 +50,6 @@ jobs:
           cp $PP_PATH_ROOT ~/Library/MobileDevice/Provisioning\ Profiles
 
       - name: Build ipa with Fastlane
+        env: 
+          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APPLE_SPECIFIC_PASSWORD }}
         run: fastlane ios beta internal

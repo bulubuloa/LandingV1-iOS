@@ -17,7 +17,6 @@ default_platform(:ios)
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
-  ENV["FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD"] = ENV["APPLE_SPECIFIC_PASSWORD"]
 
   lane :beta do
     increment_build_number(xcodeproj: "LandingV1.xcodeproj")
